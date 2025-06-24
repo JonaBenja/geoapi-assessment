@@ -9,5 +9,8 @@ class GeoLocation(models.Model):
         get_user_model(), on_delete=models.CASCADE, null=True, blank=True
     )
 
+    class Meta:
+        ordering = ["-timestamp"]
+
     def __str__(self):
         return f"{self.user or 'Mystery'} at {self.location}"

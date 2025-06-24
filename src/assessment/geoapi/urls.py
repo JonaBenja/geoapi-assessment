@@ -6,7 +6,7 @@ from .views import GeoLocationList
 
 
 urlpatterns = [
-    path("locations/", GeoLocationList.as_view()),
+    path("locations/", GeoLocationList.as_view(), name="location-list"),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
