@@ -15,8 +15,17 @@ class GeoLocationSerializer(serializers.ModelSerializer):
     """
 
     user = serializers.StringRelatedField(read_only=True)
-    latitude = serializers.FloatField(write_only=True)
-    longitude = serializers.FloatField(write_only=True)
+    latitude = serializers.FloatField(
+        write_only=True,
+        help_text="Latitude in graden (°)",
+        initial=52.3702,
+    )
+
+    longitude = serializers.FloatField(
+        write_only=True,
+        help_text="Longitude in graden (°)",
+        initial=4.8948,
+    )
 
     class Meta:
         model = GeoLocation
