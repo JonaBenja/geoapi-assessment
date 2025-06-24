@@ -52,3 +52,19 @@ class GeoLocationSerializer(serializers.ModelSerializer):
         latitude = validated_data.pop("latitude")
         point = Point(longitude, latitude)
         return GeoLocation.objects.create(location=point, **validated_data)
+
+
+ALLOWED_FIELD_TYPES = {"CharField", "DateTimeField", "IntegerField", "PointField"}
+
+
+class ModelConfigUploadSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    fields = serializers.DictField(child=serializers.CharField())
+
+    def validate_fields(self, fields):
+        for field_name, field_type in fields.items():
+            if field_type not in ALLOWED_FIELD_TYPES:
+                raise serializers.ValidationError(
+                    f"Unsupported field type: {field_type}"
+                )
+        return fields

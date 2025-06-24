@@ -2,12 +2,13 @@ from django.urls import path
 
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from .views import GeoLocationListView, GeoLocationCreateView
+from . import views
 
 
 urlpatterns = [
-    path("locations/", GeoLocationListView.as_view(), name="location-list"),
-    path("locations/add/", GeoLocationCreateView.as_view(), name="location-create"),
+    path("", views.GeoLocationListView.as_view(), name="location-list"),
+    path("add/", views.GeoLocationCreateView.as_view(), name="location-create"),
+    path("add_config/", views.AddConfigView.as_view(), name="add_config"),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

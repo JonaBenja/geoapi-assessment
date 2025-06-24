@@ -14,3 +14,11 @@ class GeoLocation(models.Model):
 
     def __str__(self):
         return f"{self.user or 'Mystery'} at {self.location}"
+
+
+class GeoLocationBase(models.Model):
+    location = models.PointField()
+    timestamp = models.DateTimeField()
+
+    class Meta:
+        abstract = True

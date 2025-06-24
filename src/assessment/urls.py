@@ -20,12 +20,16 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from rest_framework.routers import DefaultRouter
+
 from . import views
 
+dynamic_router = DefaultRouter()
 
 urlpatterns = [
+    path("configmodels/", include(dynamic_router.urls)),
     path("api-auth/", include("rest_framework.urls")),
     path("status", views.RootView.as_view()),
     path("admin/", admin.site.urls),
-    path("", include("assessment.geoapi.urls")),
+    path("locations/", include("assessment.geoapi.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
